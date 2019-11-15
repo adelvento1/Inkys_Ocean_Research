@@ -4,12 +4,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class LanguageScreen extends React.Component {
 
+    
+    // setLanguageforAudio(lang){
+    //    const languageSetting = lang;
+    //    console.log("languageSetting: " + languageSetting);
+    //    this.props.navigation.navigate('LevelScreen');
+    // }
 
     render(){
         return(
             <View>
-                <Button title="English" onPress={() => this.props.navigation.navigate('Level')}></Button>
-                <Button title="Spanish" onPress={() => this.props.navigation.navigate('Level')}></Button>
+                <Button title="English" onPress={() => this.props.navigation.navigate('LevelScreen')}></Button>
+                <Button title="Spanish"  onPress={() => this.props.navigation.navigate('LevelScreen')}></Button>
             </View>
         )
     }
