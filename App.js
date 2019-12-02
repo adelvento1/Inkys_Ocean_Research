@@ -1,10 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Title from './Components/Title.js'
 import Language from './Components/Language.js';
-import IntroAnim from './Components/IntroAnim.js';
 import Level from './Components/Level.js';
 import EndPage from './Components/EndPage.js';
 
@@ -15,30 +12,40 @@ import EndPage from './Components/EndPage.js';
  * Voice Recordings in Spanish by David Latorre
  * Script by Ashley Delvento
  * Background music by Jason Chiappa
- * Started 10/18/19
+ * Started 10/18/19 - 12/3/2019
  */
 
 const AppNavigator = createStackNavigator({
     MainScreen: {
-      screen: Title
+      screen: Title,
+      navigationOptions: {
+        header: null
+      }
     },
     LanguageScreen:{
-      screen: Language
+      screen: Language,
+      navigationOptions: {
+        header: null
+      }
     },
-    //IntroAnim:{
-    //  screen: IntroAnim
-    //}
     LevelScreen:{
-      screen: Level
+      screen: Level,
+      navigationOptions: {
+        header: null
+      }
     },
     EndPage:{
-      screen: EndPage
+      screen: EndPage,
+      navigationOptions: {
+        header: null
+      }
     }
 },
 
 {
-  initialRouteName: 'MainScreen'
+  initialRouteName: 'MainScreen',
 }
+
     );
 
 export default createAppContainer(AppNavigator);

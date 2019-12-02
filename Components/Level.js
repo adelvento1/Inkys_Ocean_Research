@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import LangSetting from './LangSetting.js';
 import img0 from '../assets/0.png';
 import img1 from '../assets/1.png';
 import img2 from '../assets/2.png';
@@ -30,8 +31,8 @@ class LevelScreen extends React.Component {
      * Initializes a default state for a level
      */
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             num: 0,
             numImgArry: [img0, img1, img2, img3, img4, img5, img6, img7, img8, img9],
@@ -43,8 +44,9 @@ class LevelScreen extends React.Component {
             levelNumber: 1,
             reloadFlag: false,
             isDisabled: [false, false, false, false, false, false, false, false, false],
-            alignmentLeft: 50,
-            opacityTracker: [1, 1, 1, 1, 1, 1, 1, 1, 1]
+            alignmentLeft: '45%',
+            opacityTracker: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+            languageTag: this.props.navigation.getParam('languageT', '')
         }
     }
 
@@ -72,6 +74,7 @@ class LevelScreen extends React.Component {
      */
 
     chooseCorrect = () => {
+        console.log("language setting: " + this.state.languageTag);
         if (this.state.levelNumber < 4) {
             var randomLength = Math.floor(Math.random() * (5 - 3) + 3);
         } else {
@@ -95,12 +98,12 @@ class LevelScreen extends React.Component {
         }
         var indicesOfCorrectMicros = [];
 
-        var alignmentVar = 0;
+        var alignmentVar = '0%';
         if (randomLength < 4) {
-            alignmentVar = 125;
+            alignmentVar = '35%';
         } else if (randomLength < 7) {
-            alignmentVar = 100;
-        } else { alignmentVar = 50; }
+            alignmentVar = '25%';
+        } else { alignmentVar = '15%'; }
 
         var x = 0;
         while (x < numberOfCorrectMicros) {
@@ -127,7 +130,6 @@ class LevelScreen extends React.Component {
         for (var y = 0; y < indicesOfCorrectMicros.length; y++) {
             this.state.randImgArry[indicesOfCorrectMicros[y]] = newCorrectMicro;
         }
-
         this.setState({
             numOfCorrectMicros: numberOfCorrectMicros,
             correctAns: newCorrectMicro,
@@ -160,9 +162,12 @@ class LevelScreen extends React.Component {
                 var updatedIsDisabled = this.state.isDisabled;
                 updatedIsDisabled[id] = true;
                 this.grayOut(id);
+                LangSetting.sayNumber(this.state.languageTag, newnum);
                 if (newnum == this.state.numOfCorrectMicros) {
                     this.disableMicros();
-                    setTimeout(this.reloadMicros, 2000);
+                    if (this.state.levelNumber === 5) { LangSetting.gameComplete(this.state.languageTag); }
+                    else { LangSetting.rightAnswer(this.state.languageTag); }
+                    setTimeout(this.reloadMicros, 4000);
                 }
                 this.setState({
                     num: newnum,
@@ -170,6 +175,7 @@ class LevelScreen extends React.Component {
                 })
             } else {
                 const oldImg = [ans, this.state.randImgArry[ans]];
+                LangSetting.wrongAnswer(this.state.languageTag);
                 this.disableMicros();
                 setTimeout(this.resetMicroImg(oldImg), 2000);
                 this.setState({
@@ -250,7 +256,7 @@ class LevelScreen extends React.Component {
                 isDisabled: isDisabledReset,
                 opacityTracker: opacityReset
             });
-            this.props.navigation.navigate('EndPage');
+            this.props.navigation.navigate('EndPage', { languageTag: this.state.languageTag });
         }
 
     }
@@ -280,11 +286,9 @@ class LevelScreen extends React.Component {
      * Works in changing the value, it just isnt syncing for some reason
      */
 
-
     grayOut = (id) => {
         let opacityChange = this.state.opacityTracker;
         opacityChange[id] = 0.5;
-        console.log(opacityChange);
         this.setState({
             opacityTracker: opacityChange
         });
@@ -304,7 +308,6 @@ class LevelScreen extends React.Component {
                     source={require('../assets/card.png')}
                 />
 
-
                 <Image
                     id="BubbleCount"
                     style={{ width: 85, height: 115, position: "absolute", right: 10, top: 10 }}
@@ -316,86 +319,72 @@ class LevelScreen extends React.Component {
                     style={{ width: 40, height: 40, position: "absolute", right: 35, top: 125 }}
                     source={this.state.correctAns}
                 />
-                <TouchableOpacity style={{ top: 75, left: this.state.alignmentLeft, width: '100%', height: '75%', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} disabled={true}>
+                <TouchableOpacity style={{ top: '45%', left: this.state.alignmentLeft, width: '100%', height: '65%', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} disabled={true}>
 
                     <TouchableOpacity onPress={this.countMicro(0)} disabled={this.state.isDisabled[0]}>
                         <Image
-                            id='positionOne'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[0] }}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[0] }}
                             source={this.state.randImgArry[0]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(1)} disabled={this.state.isDisabled[1]}>
                         <Image
-                            id='positionTwo'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[1] }}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[1] }}
                             source={this.state.randImgArry[1]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(2)} disabled={this.state.isDisabled[2]}>
                         <Image
-                            id='positionThree'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[2]}}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[2] }}
                             source={this.state.randImgArry[2]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(3)} disabled={this.state.isDisabled[3]}>
                         <Image
-                            id='positionFour'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[3]}}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[3] }}
                             source={this.state.randImgArry[3]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(4)} disabled={this.state.isDisabled[4]}>
                         <Image
-                            id='positionFive'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[4]}}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[4] }}
                             source={this.state.randImgArry[4]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(5)} disabled={this.state.isDisabled[5]}>
                         <Image
-                            id='positionSix'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[5]}}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[5] }}
                             source={this.state.randImgArry[5]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(6)} disabled={this.state.isDisabled[6]}>
                         <Image
-                            id='positionSeven'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[6]}}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[6] }}
                             source={this.state.randImgArry[6]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(7)} disabled={this.state.isDisabled[7]}>
                         <Image
-                            id='positionEight'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[7]}}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[7] }}
                             source={this.state.randImgArry[7]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(8)} disabled={this.state.isDisabled[8]} >
                         <Image
-                            id='positionNine'
-                            style={{width: 75, height: 75, opacity: this.state.opacityTracker[8]}}
+                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[8] }}
                             source={this.state.randImgArry[8]}
                         />
                     </TouchableOpacity>
 
                 </TouchableOpacity>
-
-
-
-
-
 
             </View>
         )

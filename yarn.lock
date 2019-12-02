@@ -4299,6 +4299,14 @@ expo-asset@~7.0.0:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
+expo-av@~7.0.0:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-7.0.1.tgz#c25cb66f20333157ae65110aa9faef68b34cc7a8"
+  integrity sha512-wsSMqvkvVvYMsqTrgCDO8xsDVsv201kg+LTO1j6/HfKRLLKcTapZZVSSl4rqMCEWRzdTP4L/hCyOo19jf8PdKQ==
+  dependencies:
+    lodash "^4.17.15"
+    nullthrows "^1.1.0"
+
 expo-cli@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.4.1.tgz#e3619434c252c4132d1f9ee869f7d1f52a447d7d"
