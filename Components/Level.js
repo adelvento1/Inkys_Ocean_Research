@@ -46,7 +46,8 @@ class LevelScreen extends React.Component {
             isDisabled: [false, false, false, false, false, false, false, false, false],
             alignmentLeft: '45%',
             opacityTracker: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            languageTag: this.props.navigation.getParam('languageT', '')
+            languageTag: this.props.navigation.getParam('language', ''),
+            colorForInstruct: ["orange", "blue", "green", "purple", "red", "yellow"]
         }
     }
 
@@ -73,12 +74,12 @@ class LevelScreen extends React.Component {
      * after the correct answer has been chosen
      */
 
-    chooseCorrect = () => {
-        console.log("language setting: " + this.state.languageTag);
+    chooseCorrect = async () => {
+        let randomLength;
         if (this.state.levelNumber < 4) {
-            var randomLength = Math.floor(Math.random() * (5 - 3) + 3);
+            randomLength = Math.floor(Math.random() * (5 - 3) + 3);
         } else {
-            var randomLength = Math.floor(Math.random() * (9 - 5) + 5);
+            randomLength = Math.floor(Math.random() * (9 - 5) + 5);
         }
         var ranIndex = Math.floor(Math.random() * (this.state.microImgArry.length - 1));
         var newCorrectMicro = this.state.microImgArry[ranIndex];
@@ -91,12 +92,13 @@ class LevelScreen extends React.Component {
      */
 
     randomizeMicroShown = (randomLength, newCorrectMicro) => {
+        let numberOfCorrectMicros;
         if (this.state.levelNumber < 4) {
-            var numberOfCorrectMicros = Math.floor(Math.random() * (randomLength - 1) + 1);
+            numberOfCorrectMicros = Math.floor(Math.random() * (randomLength - 1) + 1);
         } else {
-            var numberOfCorrectMicros = Math.floor(Math.random() * (randomLength - 4) + 4);
+            numberOfCorrectMicros = Math.floor(Math.random() * (randomLength - 4) + 4);
         }
-        var indicesOfCorrectMicros = [];
+        let indicesOfCorrectMicros = [];
 
         var alignmentVar = '0%';
         if (randomLength < 4) {
@@ -113,10 +115,12 @@ class LevelScreen extends React.Component {
                 x++;
             }
         }
-
+        let removedColor = " ";
         for (var i = 0; i < this.state.microImgArry.length; i++) {
             if (this.state.microImgArry[i] === newCorrectMicro) {
                 this.state.microImgArry.splice(i, 1);
+                removedColor = this.state.colorForInstruct[i];
+                this.state.colorForInstruct.splice(i, 1);
             }
         }
 
@@ -126,10 +130,17 @@ class LevelScreen extends React.Component {
         }
 
         this.state.microImgArry.push(newCorrectMicro);
+        this.state.colorForInstruct.push(removedColor);
+
+        console.log("MicroImg: " + this.state.microImgArry + ". ColorInstr: " + this.state.colorForInstruct + " LVL: " + this.state.levelNumber);
+        if (this.state.levelNumber === 0) {
+            //Dont play Instruction audio on any page outside of the levels
+        } else { LangSetting.levelInstruct(this.state.languageTag, removedColor); }
 
         for (var y = 0; y < indicesOfCorrectMicros.length; y++) {
             this.state.randImgArry[indicesOfCorrectMicros[y]] = newCorrectMicro;
         }
+
         this.setState({
             numOfCorrectMicros: numberOfCorrectMicros,
             correctAns: newCorrectMicro,
@@ -319,30 +330,30 @@ class LevelScreen extends React.Component {
                     style={{ width: 40, height: 40, position: "absolute", right: 35, top: 125 }}
                     source={this.state.correctAns}
                 />
-                <TouchableOpacity style={{ top: '45%', left: this.state.alignmentLeft, width: '100%', height: '65%', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }} disabled={true}>
+                <View style={{ top: '30%', left: this.state.alignmentLeft, width: '100%', height: '45%', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column' }}>
 
-                    <TouchableOpacity onPress={this.countMicro(0)} disabled={this.state.isDisabled[0]}>
+                    <TouchableOpacity onPress={this.countMicro(0)} disabled={this.state.isDisabled[0]} >
                         <Image
                             style={{ width: 75, height: 75, opacity: this.state.opacityTracker[0] }}
                             source={this.state.randImgArry[0]}
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.countMicro(1)} disabled={this.state.isDisabled[1]}>
+                    <TouchableOpacity onPress={this.countMicro(1)} disabled={this.state.isDisabled[1]} >
                         <Image
                             style={{ width: 75, height: 75, opacity: this.state.opacityTracker[1] }}
                             source={this.state.randImgArry[1]}
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.countMicro(2)} disabled={this.state.isDisabled[2]}>
+                    <TouchableOpacity onPress={this.countMicro(2)} disabled={this.state.isDisabled[2]} >
                         <Image
                             style={{ width: 75, height: 75, opacity: this.state.opacityTracker[2] }}
                             source={this.state.randImgArry[2]}
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.countMicro(3)} disabled={this.state.isDisabled[3]}>
+                    <TouchableOpacity onPress={this.countMicro(3)} disabled={this.state.isDisabled[3]} >
                         <Image
                             style={{ width: 75, height: 75, opacity: this.state.opacityTracker[3] }}
                             source={this.state.randImgArry[3]}
@@ -356,21 +367,21 @@ class LevelScreen extends React.Component {
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.countMicro(5)} disabled={this.state.isDisabled[5]}>
+                    <TouchableOpacity onPress={this.countMicro(5)} disabled={this.state.isDisabled[5]} >
                         <Image
                             style={{ width: 75, height: 75, opacity: this.state.opacityTracker[5] }}
                             source={this.state.randImgArry[5]}
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.countMicro(6)} disabled={this.state.isDisabled[6]}>
+                    <TouchableOpacity onPress={this.countMicro(6)} disabled={this.state.isDisabled[6]} >
                         <Image
                             style={{ width: 75, height: 75, opacity: this.state.opacityTracker[6] }}
                             source={this.state.randImgArry[6]}
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.countMicro(7)} disabled={this.state.isDisabled[7]}>
+                    <TouchableOpacity onPress={this.countMicro(7)} disabled={this.state.isDisabled[7]} >
                         <Image
                             style={{ width: 75, height: 75, opacity: this.state.opacityTracker[7] }}
                             source={this.state.randImgArry[7]}
@@ -384,7 +395,8 @@ class LevelScreen extends React.Component {
                         />
                     </TouchableOpacity>
 
-                </TouchableOpacity>
+
+                </View>
 
             </View>
         )

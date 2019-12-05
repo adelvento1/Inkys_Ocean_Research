@@ -30,5 +30,7 @@ export default {
     six: require('../assets/sounds/English/OAG1_41E.mp3'),
     seven: require('../assets/sounds/English/OAG1_42E.mp3'),
     eight: require('../assets/sounds/English/OAG1_43E.mp3'),
-    nine: require('../assets/sounds/English/OAG1_44E.mp3')
+    nine: require('../assets/sounds/English/OAG1_44E.mp3'),
+
+    endPageInst: require('../assets/sounds/English/OAG1_295E.mp3')
 };
