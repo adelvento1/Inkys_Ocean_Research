@@ -131,8 +131,7 @@ class LevelScreen extends React.Component {
 
         this.state.microImgArry.push(newCorrectMicro);
         this.state.colorForInstruct.push(removedColor);
-
-        console.log("MicroImg: " + this.state.microImgArry + ". ColorInstr: " + this.state.colorForInstruct + " LVL: " + this.state.levelNumber);
+        
         if (this.state.levelNumber === 0) {
             //Dont play Instruction audio on any page outside of the levels
         } else { LangSetting.levelInstruct(this.state.languageTag, removedColor); }
