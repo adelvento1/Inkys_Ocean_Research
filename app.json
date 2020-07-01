@@ -2,12 +2,11 @@
   "expo": {
     "name": "Ocean Academy",
     "slug": "ocean-academy",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,7 +23,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.AdelventoApps.InkysOceanResearch",
       "supportsTablet": true
-    }
+    },
+    "android": {
+      "permissions": [],
+      "versionCode": 1,
+      "package": "com.AdelventoApps.InkysOceanResearch"
+  }
   }
 }

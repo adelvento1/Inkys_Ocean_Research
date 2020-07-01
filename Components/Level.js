@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LangSetting from './LangSetting.js';
+import styles from './styles.js';
 import img0 from '../assets/0.png';
 import img1 from '../assets/1.png';
 import img2 from '../assets/2.png';
@@ -306,9 +307,9 @@ class LevelScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ width: '100%', height: '100%' }}>
+            <View style={styles.fullScreen}>
                 <Image
-                    style={{ position: "absolute", width: '100%', height: '100%' }}
+                    style={[styles.fullScreen, { position: "absolute"}]}
                     source={require('../assets/level_background.png')}
                 />
 
@@ -333,67 +334,66 @@ class LevelScreen extends React.Component {
 
                     <TouchableOpacity onPress={this.countMicro(0)} disabled={this.state.isDisabled[0]} >
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[0] }}
+                            style={[styles.microSize, { opacity: this.state.opacityTracker[0] }]}
                             source={this.state.randImgArry[0]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(1)} disabled={this.state.isDisabled[1]} >
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[1] }}
+                            style={[styles.microSize, {opacity: this.state.opacityTracker[1] }]}
                             source={this.state.randImgArry[1]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(2)} disabled={this.state.isDisabled[2]} >
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[2] }}
+                            style={[styles.microSize, {opacity: this.state.opacityTracker[2] }]}
                             source={this.state.randImgArry[2]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(3)} disabled={this.state.isDisabled[3]} >
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[3] }}
+                            style={[styles.microSize, {opacity: this.state.opacityTracker[3] }]}
                             source={this.state.randImgArry[3]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(4)} disabled={this.state.isDisabled[4]}>
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[4] }}
+                            style={[styles.microSize, {opacity: this.state.opacityTracker[4] }]}
                             source={this.state.randImgArry[4]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(5)} disabled={this.state.isDisabled[5]} >
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[5] }}
+                            style={[styles.microSize, {opacity: this.state.opacityTracker[5] }]}
                             source={this.state.randImgArry[5]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(6)} disabled={this.state.isDisabled[6]} >
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[6] }}
+                            style={[styles.microSize, {opacity: this.state.opacityTracker[6] }]}
                             source={this.state.randImgArry[6]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(7)} disabled={this.state.isDisabled[7]} >
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[7] }}
+                            style={[styles.microSize, {opacity: this.state.opacityTracker[7] }]}
                             source={this.state.randImgArry[7]}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.countMicro(8)} disabled={this.state.isDisabled[8]} >
                         <Image
-                            style={{ width: 75, height: 75, opacity: this.state.opacityTracker[8] }}
+                            style={[styles.microSize, {opacity: this.state.opacityTracker[8] }]}
                             source={this.state.randImgArry[8]}
                         />
                     </TouchableOpacity>
-
 
                 </View>
 

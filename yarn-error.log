@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add component LangSetting
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add expo-cli
 
 PATH: 
   C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ocean\AppData\Local\Yarn\bin;C:\Users\ocean\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ocean\AppData\Local\GitHubDesktop\bin;C:\Program Files\heroku\bin
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/LangSetting: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65939:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140464:22)
-      at Request.emit (events.js:198:13)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141436:10)
-      at Request.emit (events.js:198:13)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141358:12)
-      at Object.onceWrapper (events.js:286:20)
-      at IncomingMessage.emit (events.js:203:15)
-      at endReadableNT (_stream_readable.js:1129:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: EPERM: operation not permitted, unlink 'C:\Users\ocean\Desktop\College\F4\Ocean_App\git_prog\Inkys_Ocean_Research\node_modules\@expo\xdl\binaries\windows\adb\AdbWinApi.dll'
 
 npm manifest: 
   {
@@ -38,6 +28,7 @@ npm manifest:
     },
     "dependencies": {
       "expo": "^35.0.0",
+      "expo-av": "~7.0.0",
       "expo-cli": "^3.4.1",
       "react": "16.8.3",
       "react-dom": "16.8.3",
@@ -4359,6 +4350,14 @@ Lockfile:
       blueimp-md5 "^2.10.0"
       path-browserify "^1.0.0"
       url-parse "^1.4.4"
+  
+  expo-av@~7.0.0:
+    version "7.0.1"
+    resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-7.0.1.tgz#c25cb66f20333157ae65110aa9faef68b34cc7a8"
+    integrity sha512-wsSMqvkvVvYMsqTrgCDO8xsDVsv201kg+LTO1j6/HfKRLLKcTapZZVSSl4rqMCEWRzdTP4L/hCyOo19jf8PdKQ==
+    dependencies:
+      lodash "^4.17.15"
+      nullthrows "^1.1.0"
   
   expo-cli@^3.4.1:
     version "3.4.1"

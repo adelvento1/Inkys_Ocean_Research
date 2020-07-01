@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LangSetting from './LangSetting.js';
+import styles from './styles.js';
 
 class MainScreen extends React.Component {
 
@@ -17,17 +18,17 @@ class MainScreen extends React.Component {
         return (
             <View>
 
-                <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={this.navigateToLangSelect}>
+                <TouchableOpacity style={styles.fullScreen} onPress={this.navigateToLangSelect}>
                     <Image
-                        style={{ position: "absolute", width: '100%', height: '100%' }}
+                        style={[styles.fullScreen, { position: "absolute"}]}
                         source={require('../assets/main_background.png')}
                     />
                     <Image
-                        style={{ position: "absolute", left: '5%', width: 325, height: 125 }}
+                        style={{ position: "absolute", left: '5%', top: '10%', width: 325, height: 125 }}
                         source={require('../assets/title_transp.png')}
                     />
                     <Image
-                        style={{ position: "absolute", left: '-10%', bottom: '22%', width: 350, height: 270 }}
+                        style={{ position: "absolute", left: '-10%', bottom: '18%', width: 350, height: 270 }}
                         source={require('../assets/octopus_1.png')}
                     />
                     <Image

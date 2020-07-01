@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, ImageBackground } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import styles from './styles.js';
 
 class LanguageScreen extends React.Component {
 
@@ -11,9 +11,9 @@ class LanguageScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ width: '100%', height: '100%' }}>
+            <View style={styles.fullScreen}>
                 <ImageBackground
-                    style={{ position: "absolute", width: '100%', height: '100%' }}
+                    style={[styles.fullScreen, { position: "absolute"}]}
                     source={require('../assets/main_background.png')}
                 >
                 <TouchableOpacity
